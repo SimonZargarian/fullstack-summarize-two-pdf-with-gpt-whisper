@@ -1,6 +1,6 @@
 package com.kokab.twodocscomparetest.controller;
 
-import com.kokab.twodocscomparetest.open_ai.OpenAIService;
+import com.kokab.twodocscomparetest.open_ai.OpenAIServiceImpl;
 import com.kokab.twodocscomparetest.service.PdfServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +21,7 @@ public class PdfController {
     private PdfServiceImpl pdfService;
 
     @Autowired
-    private OpenAIService openAIService;
-
-    /*@Autowired
-    public PdfController(PdfServiceImpl pdfService) {
-        this.pdfService = pdfService;
-    }*/
+    private OpenAIServiceImpl openAIServiceImpl;
 
     @PostMapping("/extract-texts")
     public ResponseEntity<Map<String, Object>> extractTexts(@RequestParam("file1") MultipartFile file1,
@@ -35,9 +30,9 @@ public class PdfController {
         List<String> texts = pdfService.extractTextFromPDFs(files);
         System.out.println("File 1: " + texts.get(0) + "File 2: " + texts.get(1));
 
-        String summarizedText = openAIService.summarizeText(texts.get(0), texts.get(1));
+        String summarizedText = openAIServiceImpl.summarizeText(texts.get(0), texts.get(1));
 
-        String mp3Url = openAIService.generateSpeechFromText(summarizedText);
+        String mp3Url = openAIServiceImpl.generateSpeechFromText(summarizedText);
 
         Map<String, Object> response = new HashMap<>();
         response.put("texts", texts);

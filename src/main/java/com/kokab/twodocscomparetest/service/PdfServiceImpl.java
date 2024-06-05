@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PdfServiceImpl {
+public class PdfServiceImpl implements PdfService {
 
     public List<String> extractTextFromPDFs(List<MultipartFile> files) {
         List<String> texts = new ArrayList<>();
