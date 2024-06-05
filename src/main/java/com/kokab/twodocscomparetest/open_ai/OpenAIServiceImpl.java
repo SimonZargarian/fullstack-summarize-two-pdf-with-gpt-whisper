@@ -18,7 +18,7 @@ import java.nio.file.StandardOpenOption;
 @Service
 public class OpenAIServiceImpl implements OpenAIService{
 
-    private static final String API_KEY = "Your-api-key";
+    private static final String API_KEY = "";
     private static final Logger logger = LoggerFactory.getLogger(OpenAIServiceImpl.class);
 
     public String summarizeText(String file1Content, String file2Content) {
